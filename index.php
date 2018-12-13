@@ -1,61 +1,23 @@
-<?php require_once "connect_database.php" ?>
 <?php include_once "_header.php"; ?>
 
-    <div class="album py-5 bg-light">
-        <div class="container">
+<?php
+    $page = "home";
+    $category = "";
 
-            <div class="droplist">
-                <input type="text"
-                       name="userInput"
-                       id="userInput"
-                       placeholder="search..."/>
-                <div id="droplistContent" class="dropdown-content">
-                    <ul>
-                        <li>
-                            <img src="images/Сало.jpg" class="img-circle"/>
-                            <a href="#">Сало</a>
-                        </li>
-                        <li>
-                            <img src="images/Цибуля.jpg"
-                                 class="img-circle"/>
-                            <a href="#">Цибуля</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+    if(isset($_GET['page']) and !empty($_GET['page']))
+        $page=$_GET['page'];	/* gets the variable $page */
 
-            <h1>Авто сервіс Вкрути Лампочку</h1>
+    if(isset($_GET['category']) and !empty($_GET['category']))
+        $category=$_GET['category']."/";	/* gets the variable $page */
 
-            <div class="row">
-                <a href="create.php" class="btn btn-success">Додати</a>
-                <table class="table table-bordered">
-                    <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Name</th>
-                        <th>Email</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <?php
-                    $res = $connect->query("SELECT Id,Email,Firstname,Lastname FROM tblusers");
-                    while ($row = $res->fetch_assoc()) {
-                        echo "
-                        <tr>
-                            <td></td>
-                            <td>" . $row['Lastname'] . " " . $row['Firstname'] . "</td>
-                            <td>{$row['Email']}</td>
-                        </tr>
-                        ";
-                    }
-                    ?>
-                    </tbody>
-                </table>
-            </div>
+    include($category."".$page.".php");
+//    if (!empty($page)) {
+//        include($page);
+//    } 	/* if $page has a value, include it */
+//    else {
+//        include('home.php');
+//    } 	/* otherwise, include the default page */
 
-
-        </div>
-    </div>
-
+?>
 
 <?php include_once "_footer.php"; ?>
